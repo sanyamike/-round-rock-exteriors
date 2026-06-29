@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – Round Rock Exteriors | Pressure Washing Tips & Guides</title>
+  <meta name="description" content="Expert pressure washing tips, home exterior care guides, and seasonal advice for Round Rock and Williamson County homeowners." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --rock-blue: #1B4D89;
+      --rock-blue-dark: #143a6b;
+      --pressure-orange: #E8611A;
+      --pressure-orange-dark: #c4511a;
+      --spray-blue: #4DA8DA;
+      --slate-black: #1A1E2C;
+      --clean-white: #F7F8FA;
+      --stone-gray: #6B7280;
+      --fresh-green: #22C55E;
+      --border: #E2E8F0;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: var(--slate-black); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--slate-black);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      border-bottom: 3px solid var(--pressure-orange);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo-mark {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--rock-blue); border: 2px solid var(--pressure-orange);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 15px; color: #fff;
+    }
+    .nav-logo-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 15px; color: #fff; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--pressure-orange); }
+    .nav-cta { background: var(--pressure-orange); color: #fff; padding: 10px 22px; border-radius: 6px; font-weight: 700; font-size: 14px; text-decoration: none; }
+    @media (max-width: 800px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .blog-hero {
+      background: var(--slate-black);
+      padding: 130px 5% 70px;
+      text-align: center;
+    }
+    .blog-hero .eyebrow {
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--pressure-orange);
+      margin-bottom: 16px;
+    }
+    .blog-hero h1 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900; color: #fff; margin-bottom: 18px; line-height: 1.1;
+    }
+    .blog-hero p { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 580px; margin: 0 auto; line-height: 1.7; }
+
+    /* POSTS LAYOUT */
+    .blog-wrap { max-width: 1100px; margin: 0 auto; padding: 80px 5%; }
+    .post-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-bottom: 60px; }
+    .post-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; transition: box-shadow .2s, transform .2s; cursor: pointer;
+      display: flex; flex-direction: column;
+    }
+    .post-card:hover { box-shadow: 0 12px 40px rgba(27,77,137,0.12); transform: translateY(-4px); }
+    .post-thumb {
+      height: 180px; display: flex; align-items: center; justify-content: center; font-size: 64px;
+    }
+    .post-thumb.t1 { background: linear-gradient(135deg, #1B4D89, #4DA8DA); }
+    .post-thumb.t2 { background: linear-gradient(135deg, #E8611A, #f59e0b); }
+    .post-thumb.t3 { background: linear-gradient(135deg, #143a6b, #1B4D89); }
+    .post-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+    .post-tag {
+      display: inline-block; background: rgba(27,77,137,0.08); color: var(--rock-blue);
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px; margin-bottom: 14px; align-self: flex-start;
+    }
+    .post-card h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 12px; line-height: 1.3; }
+    .post-card p { font-size: 14px; line-height: 1.7; color: var(--stone-gray); margin-bottom: 18px; flex: 1; }
+    .post-meta { font-size: 12px; color: var(--stone-gray); display: flex; gap: 12px; align-items: center; }
+    .read-more { color: var(--pressure-orange); font-weight: 700; font-size: 14px; text-decoration: none; }
+
+    /* FULL ARTICLE */
+    .article { max-width: 760px; margin: 0 auto; padding: 40px 5% 0; display: none; }
+    .article.active { display: block; }
+    .article-back {
+      display: inline-flex; align-items: center; gap: 8px; color: var(--rock-blue);
+      font-weight: 600; font-size: 14px; text-decoration: none; margin-bottom: 30px; cursor: pointer;
+    }
+    .article-tag {
+      display: inline-block; background: rgba(232,97,26,0.1); color: var(--pressure-orange);
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 4px; margin-bottom: 18px;
+    }
+    .article h1 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; margin-bottom: 16px; }
+    .article-meta { font-size: 13px; color: var(--stone-gray); margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+    .article-hero-img { height: 280px; border-radius: 16px; margin-bottom: 36px; display: flex; align-items: center; justify-content: center; font-size: 90px; }
+    .article h2 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 24px; margin: 36px 0 14px; }
+    .article h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 19px; margin: 28px 0 12px; }
+    .article p { font-size: 16px; line-height: 1.8; color: #374151; margin-bottom: 18px; }
+    .article ul { margin: 0 0 18px 22px; }
+    .article li { font-size: 16px; line-height: 1.8; color: #374151; margin-bottom: 8px; }
+    .article strong { color: var(--slate-black); }
+    .article-cta {
+      background: var(--clean-white); border-left: 4px solid var(--pressure-orange);
+      border-radius: 10px; padding: 28px; margin: 40px 0;
+    }
+    .article-cta h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 8px; }
+    .article-cta p { font-size: 15px; margin-bottom: 18px; }
+    .article-cta a {
+      display: inline-block; background: var(--pressure-orange); color: #fff;
+      padding: 12px 26px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none;
+    }
+
+    /* FOOTER */
+    footer { background: var(--slate-black); border-top: 3px solid var(--pressure-orange); padding: 50px 5% 30px; text-align: center; margin-top: 80px; }
+    footer h3 { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; color: #fff; margin-bottom: 10px; }
+    footer p { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    footer a { color: var(--pressure-orange); text-decoration: none; font-weight: 700; }
+    .footer-phone { font-size: 22px; font-weight: 800; color: var(--pressure-orange); text-decoration: none; display: inline-block; margin: 12px 0; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <div class="nav-logo-mark">RR</div>
+    <div class="nav-logo-text">Round Rock Exteriors</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#services">Services</a></li>
+    <li><a href="/#gallery">Gallery</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="/#contact">Get a Free Quote</a>
+</nav>
+
+<!-- ===================== BLOG INDEX ===================== -->
+<div id="blog-index">
+  <div class="blog-hero">
+    <p class="eyebrow">The Round Rock Exteriors Blog</p>
+    <h1>Tips for a cleaner home exterior</h1>
+    <p>Practical advice on pressure washing, seasonal maintenance, and keeping your Round Rock home looking its best — from the people who do it for a living.</p>
+  </div>
+
+  <div class="blog-wrap">
+    <div class="post-grid">
+
+      <div class="post-card" onclick="openArticle('a1')">
+        <div class="post-thumb t1">🚿</div>
+        <div class="post-body">
+          <span class="post-tag">Driveway Care</span>
+          <h2>How Often Should You Pressure Wash Your Driveway in Texas?</h2>
+          <p>Texas heat, hard water, and oil stains take a toll. Here's how often Round Rock homeowners should actually be cleaning their concrete — and why.</p>
+          <div class="post-meta"><span>5 min read</span> · <a class="read-more">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="post-card" onclick="openArticle('a2')">
+        <div class="post-thumb t2">🏠</div>
+        <div class="post-body">
+          <span class="post-tag">House Washing</span>
+          <h2>Soft Washing vs. Pressure Washing: What Your Home Actually Needs</h2>
+          <p>Not every surface should be blasted with high pressure. Learn the difference and protect your siding, roof, and brick from costly damage.</p>
+          <div class="post-meta"><span>6 min read</span> · <a class="read-more">Read →</a></div>
+        </div>
+      </div>
+
+      <div class="post-card" onclick="openArticle('a3')">
+        <div class="post-thumb t3">🍂</div>
+        <div class="post-body">
+          <span class="post-tag">Seasonal</span>
+          <h2>5 Signs It's Time to Clean Your Roof Before Fall</h2>
+          <p>Those dark streaks on your roof aren't just ugly — they're algae eating your shingles. Here's what to watch for before the season turns.</p>
+          <div class="post-meta"><span>4 min read</span> · <a class="read-more">Read →</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ARTICLE 1 ===================== -->
+<div class="article" id="a1">
+  <a class="article-back" onclick="closeArticle()">← Back to all posts</a>
+  <span class="article-tag">Driveway Care</span>
+  <h1>How Often Should You Pressure Wash Your Driveway in Texas?</h1>
+  <div class="article-meta">By Round Rock Exteriors · 5 min read</div>
+  <div class="article-hero-img" style="background:linear-gradient(135deg,#1B4D89,#4DA8DA);">🚿</div>
+
+  <p>If you live in Round Rock or anywhere in Williamson County, your driveway takes a beating. Between the relentless Texas sun, hard water mineral deposits, oil drips, and the red clay that seems to get tracked everywhere, concrete that started out bright and clean can turn dull and stained surprisingly fast.</p>
+
+  <p>So how often should you actually be pressure washing it? The short answer: <strong>once a year for most homes, and twice a year if your driveway sees heavy use or sits under a lot of trees.</strong></p>
+
+  <h2>What makes Texas driveways dirty faster</h2>
+  <p>A few local factors speed up the grime:</p>
+  <ul>
+    <li><strong>Hard water:</strong> Central Texas has notoriously hard water, which leaves chalky mineral stains, especially near sprinkler overspray.</li>
+    <li><strong>Heat and UV:</strong> Intense sun bakes oil and organic stains deep into porous concrete.</li>
+    <li><strong>Pollen and algae:</strong> Shaded, north-facing driveways grow a thin green or black algae layer that's slippery and unsightly.</li>
+    <li><strong>Oil and rust:</strong> Vehicles leak, and metal furniture or planters leave rust rings that set permanently if ignored.</li>
+  </ul>
+
+  <h2>Signs your driveway is overdue</h2>
+  <p>You don't need a calendar to know when it's time. Watch for darkened tire tracks, green or black patches in shaded areas, a chalky white film, or simply a driveway that looks noticeably duller than your neighbor's. Any of these means it's time.</p>
+
+  <h2>Why a yearly clean is worth it</h2>
+  <p>Beyond curb appeal, regular cleaning actually extends the life of your concrete. Organic growth like algae and moss holds moisture against the surface, which accelerates cracking and pitting over time. Removing it isn't just cosmetic — it's maintenance that protects a major part of your property.</p>
+
+  <p>A professional clean also reaches what a garden hose never will. Commercial-grade hot water and surface cleaners lift stains out of the pores of the concrete rather than just rinsing the top layer, leaving results that last far longer.</p>
+
+  <div class="article-cta">
+    <h3>Ready for a driveway that looks new again?</h3>
+    <p>We're offering 30% off for our first 10 founding customers in Round Rock.</p>
+    <a href="/#contact">Get Your Free Quote →</a>
+  </div>
+</div>
+
+<!-- ===================== ARTICLE 2 ===================== -->
+<div class="article" id="a2">
+  <a class="article-back" onclick="closeArticle()">← Back to all posts</a>
+  <span class="article-tag">House Washing</span>
+  <h1>Soft Washing vs. Pressure Washing: What Your Home Actually Needs</h1>
+  <div class="article-meta">By Round Rock Exteriors · 6 min read</div>
+  <div class="article-hero-img" style="background:linear-gradient(135deg,#E8611A,#f59e0b);">🏠</div>
+
+  <p>"Pressure washing" gets used as a catch-all term, but using high pressure on the wrong surface is one of the most common — and most expensive — mistakes a homeowner can make. Understanding the difference between soft washing and pressure washing will help you protect your home and get better results.</p>
+
+  <h2>What is pressure washing?</h2>
+  <p>Pressure washing uses high-pressure water to physically blast away dirt, grime, and stains. It's powerful and effective — but that power is exactly why it belongs only on hard, durable surfaces like concrete driveways, sidewalks, and patios.</p>
+
+  <h2>What is soft washing?</h2>
+  <p>Soft washing uses low pressure combined with specialized, biodegradable cleaning solutions that break down mold, mildew, algae, and dirt at the source. Instead of relying on force, it relies on chemistry. This makes it safe for delicate surfaces that high pressure would damage.</p>
+
+  <h3>Surfaces that need soft washing, not pressure</h3>
+  <ul>
+    <li><strong>Roofs:</strong> High pressure strips the protective granules off shingles and can void your warranty. Soft washing is the only safe method.</li>
+    <li><strong>Siding:</strong> Vinyl, stucco, and painted wood can crack, dent, or take on water if blasted.</li>
+    <li><strong>Screens and windows:</strong> Easily damaged by force.</li>
+    <li><strong>Older brick and mortar:</strong> High pressure can erode aging mortar joints.</li>
+  </ul>
+
+  <h2>How to know which your home needs</h2>
+  <p>As a general rule: if it's flat, horizontal, and made of concrete, pressure washing is usually fine. If it's vertical, painted, fragile, or part of your roof, it needs soft washing. A good pressure washing company will assess each surface and use the right method for each — not a one-size-fits-all blast.</p>
+
+  <p>This is exactly why hiring a professional matters. The wrong technique can cause thousands of dollars in damage to siding or roofing, while the right approach gets your home spotless and keeps it protected.</p>
+
+  <div class="article-cta">
+    <h3>Not sure what your home needs?</h3>
+    <p>We'll assess every surface and use the safe, correct method — free quote, no pressure.</p>
+    <a href="/#contact">Request Your Free Quote →</a>
+  </div>
+</div>
+
+<!-- ===================== ARTICLE 3 ===================== -->
+<div class="article" id="a3">
+  <a class="article-back" onclick="closeArticle()">← Back to all posts</a>
+  <span class="article-tag">Seasonal</span>
+  <h1>5 Signs It's Time to Clean Your Roof Before Fall</h1>
+  <div class="article-meta">By Round Rock Exteriors · 4 min read</div>
+  <div class="article-hero-img" style="background:linear-gradient(135deg,#143a6b,#1B4D89);">🍂</div>
+
+  <p>Your roof is one of the most expensive components of your home, yet it's the easiest to ignore — until there's a problem. Those dark streaks and patches you've been driving past for months are usually a sign of algae and moss that are actively shortening your roof's lifespan. Here are five signs it's time to act before fall.</p>
+
+  <h2>1. Dark streaks running down the shingles</h2>
+  <p>Those black streaks are a blue-green algae called <strong>Gloeocapsa magma</strong>. It feeds on the limestone filler in asphalt shingles and spreads over time. Left alone, it eats away at the granules that protect your roof from UV damage.</p>
+
+  <h2>2. Green moss or patches in shaded areas</h2>
+  <p>Moss holds moisture against your shingles, which leads to rot and can lift shingle edges, creating entry points for water. North-facing and tree-shaded sections are most prone.</p>
+
+  <h2>3. Granules collecting in your gutters</h2>
+  <p>If you notice sand-like granules in your gutters or downspouts, your shingles are deteriorating — often accelerated by the organic growth above.</p>
+
+  <h2>4. Your roof looks noticeably darker than it used to</h2>
+  <p>A roof that's gone from clean to dingy isn't just aging — it's usually covered in a thin biological film that's both unsightly and damaging.</p>
+
+  <h2>5. It's been more than 2-3 years since the last cleaning</h2>
+  <p>Even without obvious signs, a periodic soft wash keeps growth from taking hold in the first place. Prevention is far cheaper than a premature roof replacement.</p>
+
+  <h2>Why timing before fall matters</h2>
+  <p>Cleaning before the cooler, wetter months means you remove the moisture-trapping growth before it has a season to do damage. It also keeps your gutters flowing freely when the leaves start to drop.</p>
+
+  <p>Remember: roofs should <strong>only</strong> be soft washed, never pressure washed. The low-pressure, solution-based approach kills the algae and moss at the root without harming your shingles.</p>
+
+  <div class="article-cta">
+    <h3>Spot any of these signs on your roof?</h3>
+    <p>Our safe soft-wash roof cleaning removes streaks and moss without damaging your shingles.</p>
+    <a href="/#contact">Get Your Free Roof Quote →</a>
+  </div>
+</div>
+
+<footer>
+  <h3>Round Rock Exteriors</h3>
+  <p>Professional pressure washing for Round Rock & Williamson County.</p>
+  <a href="tel:+15129107247" class="footer-phone">(512) 910-7247</a>
+  <p><a href="/">← Back to Home</a></p>
+  <p style="margin-top:16px;">© 2024 Round Rock Exteriors. All rights reserved.</p>
+</footer>
+
+<script>
+  function openArticle(id) {
+    document.getElementById('blog-index').style.display = 'none';
+    document.querySelectorAll('.article').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  function closeArticle() {
+    document.querySelectorAll('.article').forEach(a => a.classList.remove('active'));
+    document.getElementById('blog-index').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
