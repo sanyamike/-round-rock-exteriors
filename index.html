@@ -12,6 +12,55 @@
     gtag('js', new Date());
     gtag('config', 'G-EFPDDF2V6L');
   </script>
+    <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFPDDF2V6L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EFPDDF2V6L');
+  </script>
+
+  <!-- ============ EVENT TRACKING — paste here ============ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        gtag('event', 'phone_click', {
+          event_category: 'engagement',
+          event_label: link.getAttribute('href'),
+        });
+      });
+    });
+    var quoteForm = document.querySelector('form');
+    if (quoteForm) {
+      quoteForm.addEventListener('submit', function () {
+        gtag('event', 'form_submit', {
+          event_category: 'lead',
+          event_label: 'quote_form',
+        });
+      });
+    }
+    var ctaPhrases = [
+      'get a free quote', 'get your free quote', 'get my free quote',
+      'request my quote', 'claim yours',
+    ];
+    document.querySelectorAll('a, button').forEach(function (el) {
+      var text = (el.textContent || '').trim().toLowerCase();
+      if (ctaPhrases.some(function (phrase) { return text.indexOf(phrase) !== -1; })) {
+        el.addEventListener('click', function () {
+          gtag('event', 'cta_click', {
+            event_category: 'engagement',
+            event_label: el.textContent.trim(),
+          });
+        });
+      }
+    });
+  });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  ...
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
