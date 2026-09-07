@@ -1172,8 +1172,8 @@
       method: "POST", mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
-    }).catch(e => console.error(e));
-
+   }).catch(e => console.error(e));
+    try { if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'main-site' }); } catch(e){}
     await Promise.allSettled([web3, sheet]);
     document.getElementById('main-form-body').classList.add('hidden');
     document.getElementById('main-form-success').classList.add('show');
